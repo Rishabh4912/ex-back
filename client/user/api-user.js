@@ -1,16 +1,22 @@
 const create = async (user) => {
   try {
-      let response = await fetch('/api/users/', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-      })
-    return await response.json()
-  } catch(err) {
-    console.log(err)
+    let response = await fetch('/api/users/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    });
+
+    // Check if the response is valid before returning the JSON
+    if (!response.ok) {
+      throw new Error('Failed to create user');
+    }
+    return await response.json();
+  } catch (err) {
+    console.log(err); // Log the error for better debugging
+    return { error: 'Something went wrong. Please try again.' }; // Return a default error message
   }
 }
 

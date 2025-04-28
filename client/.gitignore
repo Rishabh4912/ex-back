@@ -1,0 +1,7 @@
+# Node server
+server/node_modules/
+server/.env
+server/.vscode/
+server/.DS_Store
+server/logs/
+server/coverage/

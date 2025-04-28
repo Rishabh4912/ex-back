@@ -61,32 +61,68 @@ export default function Signup() {
       email: values.email || undefined,
       password: values.password || undefined
     }
+
     create(user).then((data) => {
       if (data.error) {
-        setValues({ ...values, error: data.error})
+        setValues({ ...values, error: data.error })  // Handle the error
       } else {
-        setValues({ ...values, error: '', open: true})
+        setValues({ ...values, error: '', open: true })  // Clear error and open dialog
       }
+    }).catch(err => {
+      setValues({ ...values, error: 'An unexpected error occurred. Please try again.' }); // Handle unexpected errors
     })
   }
 
-    return (<div>
+  return (
+    <div>
       <Card className={classes.card}>
         <CardContent>
           <Typography variant="h6" className={classes.title}>
             Sign Up
           </Typography>
-          <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
-          <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
-          <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
-          <br/> {
-            values.error && (<Typography component="p" color="error">
+          <TextField 
+            id="name" 
+            label="Name" 
+            className={classes.textField} 
+            value={values.name} 
+            onChange={handleChange('name')} 
+            margin="normal"
+          /><br/>
+          <TextField 
+            id="email" 
+            type="email" 
+            label="Email" 
+            className={classes.textField} 
+            value={values.email} 
+            onChange={handleChange('email')} 
+            margin="normal"
+          /><br/>
+          <TextField 
+            id="password" 
+            type="password" 
+            label="Password" 
+            className={classes.textField} 
+            value={values.password} 
+            onChange={handleChange('password')} 
+            margin="normal"
+          />
+          <br/> 
+          {values.error && (
+            <Typography component="p" color="error">
               <Icon color="error" className={classes.error}>error</Icon>
-              {values.error}</Typography>)
-          }
+              {values.error}
+            </Typography>
+          )}
         </CardContent>
         <CardActions>
-          <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
+          <Button 
+            color="primary" 
+            variant="contained" 
+            onClick={clickSubmit} 
+            className={classes.submit}
+          >
+            Submit
+          </Button>
         </CardActions>
       </Card>
       <Dialog open={values.open} disableBackdropClick={true}>
@@ -105,5 +141,5 @@ export default function Signup() {
         </DialogActions>
       </Dialog>
     </div>
-    )
+  )
 }
