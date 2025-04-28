@@ -5,3 +5,7 @@ server/.vscode/
 server/.DS_Store
 server/logs/
 server/coverage/
+node_modules/
+build/
+dist/
+.env
